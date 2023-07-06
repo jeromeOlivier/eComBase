@@ -1,7 +1,19 @@
+import Header from "./components/Header.tsx";
+import { Container } from "react-bootstrap";
+import Footer from "./components/Footer.tsx";
+import { Outlet } from "react-router-dom";
 const App = () => {
   return (
-    <h1>Valerie Gervais</h1>
-  )
-}
+    <>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <Outlet />
+        </Container>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
-export default App
+export default App;
