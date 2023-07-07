@@ -1,0 +1,9 @@
+### Creating a new reminder
+POST http://localhost:5000/reminders
+Content-Type: application/json
+
+{
+  "title": "New reminder",
+  "description": "This is a new reminder",
+  "isComplete": false
+}
