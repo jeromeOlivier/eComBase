@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { ProductType } from "../entities/ProductType.ts";
+import { ProductType } from "../types/ProductType.ts";
 import { Link } from "react-router-dom";
 import Rating from "./Rating.tsx";
 

@@ -1,9 +1,20 @@
 import express from "express";
-const app = express();
-const port = 5000;
-import remindersRouter from "./routers/reminders";
+import dotenv from "dotenv";
+dotenv.config();
+import productRoutes from "./routers/product-routes";
+import connectDB from "./config/db";
+import { errorHandler } from "./middleware/error-handler";
 
+connectDB(); // Connect to MongoDB
+
+const port = process.env.PORT || 5000;
+const app = express();
 app.use(express.json());
-app.use("/reminders", remindersRouter);
-app.get("/", (req, res) => res.send("Express + TypeScript Server"));
+
+// ROUTES
+app.get("/", (req, res) => res.send("Server is ready"));
+
+app.use("/api/products", productRoutes);
+app.use(errorHandler);
+
 app.listen(port, () => console.log(`Server running on port: ${port}`));
