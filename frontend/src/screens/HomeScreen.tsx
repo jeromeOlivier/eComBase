@@ -1,9 +1,9 @@
 import { Row, Col } from "react-bootstrap";
-import { useGetProductsQuery } from "../slices/productsApiSlice.ts";
-import { ProductType } from "../types/ProductType.ts";
+import { useGetProductsQuery } from "../slices/apiSlice";
+import { ProductType } from "../types/ProductType";
 import Product from "../components/Product";
-import Loader from "../components/Loader.tsx";
-import Message from "../components/Message.tsx";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery(undefined);
@@ -16,6 +16,7 @@ const HomeScreen = () => {
       return message;
     }
   };
+
   return (
     <>
       <h1>Maîtrisez les outils de bureautique les plus en demande</h1>
@@ -27,9 +28,7 @@ const HomeScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <h2>
-          <Message variant="danger">{renderErrorMessage(error)}</Message>
-        </h2>
+        <Message variant="danger">{renderErrorMessage(error)}</Message>
       ) : (
         <>
           <Row>

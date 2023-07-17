@@ -12,17 +12,26 @@ import {
   Form,
 } from "react-bootstrap";
 import Rating from "../components/Rating.tsx";
-import { useGetProductByIdQuery } from "../slices/productsApiSlice.ts";
+import { useGetProductByIdQuery } from "../slices/apiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { addToCart } from "../slices/cartSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { ProductType } from "../types/ProductType";
 
 const ProductScreen = () => {
-  const { id: productId } = useParams();
+  const { id: productId } = useParams() as { id: string };
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data: product, isLoading, error } = useGetProductByIdQuery(productId);
+  const result = useGetProductByIdQuery(productId);
+  4;
+  const product: ProductType = result.data;
+  const { isLoading, error } = result as {
+    isLoading: boolean;
+    error: any;
+  };
   const renderErrorMessage = (err: any) => {
     const { data } = err || {};
     const { message } = data || {};
@@ -32,12 +41,15 @@ const ProductScreen = () => {
       return message;
     }
   };
+
+  const cart = useSelector((state: RootState) => state.cart);
+  console.log("Cart Item: ", cart.cartItems);
   const addToCartHandler = () => {
-    if (product) {
-      dispatch(addToCart({ ...product, quantity }));
-      navigate("/cart");
-    }
+    dispatch(addToCart({ product: { ...product }, quantity }));
+    navigate("/cart");
   };
+
+  const isInStock: boolean = product?.countInStock > 0;
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
@@ -46,9 +58,7 @@ const ProductScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <h2>
-          <Message variant="danger">{renderErrorMessage(error)}</Message>
-        </h2>
+        <Message variant="danger">{renderErrorMessage(error)}</Message>
       ) : (
         <>
           <Row>
@@ -86,14 +96,10 @@ const ProductScreen = () => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
-                      <Col>
-                        {product?.countInStock ?? 0 > 0
-                          ? "In Stock"
-                          : "Out of Stock"}
-                      </Col>
+                      <Col>{isInStock ? "In Stock" : "Out of Stock"}</Col>
                     </Row>
                   </ListGroup.Item>
-                  {product?.countInStock > 0 && (
+                  {isInStock && (
                     <ListGroup.Item>
                       <Row>
                         <Col>Qty</Col>
@@ -106,9 +112,9 @@ const ProductScreen = () => {
                             ): void => setQuantity(Number(event.target.value))}
                           >
                             {[...Array(product?.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
+                              (count) => (
+                                <option key={count + 1} value={count + 1}>
+                                  {count + 1}
                                 </option>
                               )
                             )}
@@ -133,7 +139,6 @@ const ProductScreen = () => {
           </Row>
         </>
       )}
-      ; );
     </>
   );
 };
