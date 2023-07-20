@@ -1,7 +1,21 @@
 import mongoose from "mongoose";
-import review from "./Review";
+import { ReviewType, ReviewSchema } from "./review-model";
 
-const product = new mongoose.Schema(
+type ProductType = {
+  user: string;
+  name: string;
+  image: string;
+  brand: string;
+  description: string;
+  category: string;
+  price: number;
+  countInStock: number;
+  rating: number;
+  reviews: ReviewType[];
+  numReviews: number;
+};
+
+const ProductSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     name: { type: String, required: true, unique: true },
@@ -12,7 +26,7 @@ const product = new mongoose.Schema(
     price: { type: Number, required: true, default: 0 },
     countInStock: { type: Number, required: true, default: 0 },
     rating: { type: Number, required: true },
-    reviews: [review],
+    reviews: [ReviewSchema],
     numReviews: { type: Number, required: true },
   },
   {
@@ -20,6 +34,6 @@ const product = new mongoose.Schema(
   }
 );
 
-const Product = mongoose.model("Product", product);
-
-export default Product;
+// collection name is explicitly specified as "products"
+const ProductModel = mongoose.model("Product", ProductSchema, "products");
+export { ProductModel, ProductType, ProductSchema };

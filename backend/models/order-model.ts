@@ -1,6 +1,39 @@
 import mongoose from "mongoose";
 
-const order = new mongoose.Schema(
+type OrderType = {
+  user: string;
+  orderItems: {
+    name: string;
+    qty: number;
+    image: string;
+    price: number;
+    product: string;
+  }[];
+  shippingAddress: {
+    fullName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+  };
+  paymentMethod: string;
+  paymentResult: {
+    id: string;
+    status: string;
+    update_time: string;
+    email_address: string;
+  };
+  itemsPrice: number;
+  shippingPrice: number;
+  taxPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  paidAt: Date;
+  isDelivered: boolean;
+  deliveredAt: Date;
+};
+
+const OrderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     orderItems: [
@@ -44,5 +77,6 @@ const order = new mongoose.Schema(
   }
 );
 
-const Order = mongoose.model("Order", order);
-export default Order;
+// collection name is explicitly specified as "orders"
+const OrderModel = mongoose.model("Order", OrderSchema, "orders");
+export { OrderModel, OrderType, OrderSchema };

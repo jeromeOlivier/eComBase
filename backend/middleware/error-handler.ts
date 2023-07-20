@@ -37,7 +37,7 @@ const getStackTrace = (err: Error): string | undefined =>
 
 const errorHandler = (
   err: Error,
-  req: Request,
+  _req: Request, // unused
   res: Response,
   next: NextFunction
 ): Response | void => {

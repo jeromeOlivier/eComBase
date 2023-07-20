@@ -42,8 +42,8 @@ const ProductScreen = () => {
     }
   };
 
-  const cart = useSelector((state: RootState) => state.cart);
-  console.log("Cart Item: ", cart.cartItems);
+  useSelector((state: RootState) => state.cart);
+  // console.log("Cart Item: ", cart.cartItems);
   const addToCartHandler = () => {
     dispatch(addToCart({ product: { ...product }, quantity }));
     navigate("/cart");

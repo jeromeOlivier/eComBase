@@ -1,5 +1,4 @@
-import { ProductType } from "../../frontend/src/types/ProductType";
-import ProductSchema from "../models/Product";
+import { ProductModel, ProductType } from "../models/product-model";
 import { Response, Request } from "express";
 import asyncHandler from "../middleware/async-handler";
 
@@ -7,7 +6,8 @@ import asyncHandler from "../middleware/async-handler";
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = (await ProductSchema.find({})) as ProductType[];
+  const products = (await ProductModel.find({})) as ProductType[];
+  console.log(products);
   res.json(products);
 });
 
@@ -20,7 +20,8 @@ const getProductById = asyncHandler(async (req: Request, res: Response) => {
     handleInvalidObjectIdError(res);
     return;
   }
-  const product = await ProductSchema.findById(req.params.id);
+  console.log(req.params.id);
+  const product = await ProductModel.findById(req.params.id);
   product ? res.json(product) : handleProductNotFoundError(res);
 });
 

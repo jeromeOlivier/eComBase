@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./slices/apiSlice";
 import cartSliceReducer from "./slices/cartSlice";
+import { CartStateType } from "./types/CartStateType.ts";
 
 const store = configureStore({
   reducer: {
@@ -12,5 +13,8 @@ const store = configureStore({
   devTools: true,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = {
+  [apiSlice.reducerPath]: ReturnType<typeof apiSlice.reducer>;
+  cart: CartStateType;
+};
 export default store;

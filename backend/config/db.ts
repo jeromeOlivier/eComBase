@@ -8,7 +8,10 @@ const connectDB = async () => {
 
   try {
     const conn: Mongoose = await mongoose.connect(URI);
-    console.log(`MongoDB Successfully Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Successfully Connected`);
+    console.log("Mongo HOSTNAME:", mongoose.connection.host);
+    console.log("Mongo DATABASE:", mongoose.connection.name);
+    console.log("Mongo PORT:", mongoose.connection.port);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.log(`MongoDB Error: ${error.message}`);
