@@ -32,3 +32,5 @@ node_modules
 
 # misc
 .github
+.github/workflows
+qodana_code_quality.yml
