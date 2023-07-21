@@ -18,7 +18,7 @@ const LoginScreen = () => {
   const [login, { isLoading }] = useLoginMutation();
   const { userInfo } = useSelector((state: any) => state.auth);
   {
-    /* TODO: what is the type for state? */
+    /* TODO: what is the type for state? Learn how to do types!!! */
   }
 
   const { search } = useLocation();
@@ -78,7 +78,10 @@ const LoginScreen = () => {
       </Form>
       <Row className="py-3">
         <Col>
-          New Customer? <Link to="/register">Register</Link>
+          New Customer?{" "}
+          <Link to={redirect ? `/register?redirect${redirect}` : `/register`}>
+            Register
+          </Link>
         </Col>
       </Row>
     </FormContainer>

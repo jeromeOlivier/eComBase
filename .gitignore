@@ -29,3 +29,6 @@ dist-ssr
 
 # dependencies
 node_modules
+
+# misc
+.github

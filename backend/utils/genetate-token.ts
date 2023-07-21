@@ -10,7 +10,7 @@ const generateToken = (res: Response, userId: string) => {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30d TODO: set to 1d for production
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30d TODO: set to 1d for production (days * hours * minutes * seconds * milliseconds)
   });
 };
 

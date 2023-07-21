@@ -8,6 +8,9 @@ import * as express from "express";
 
 interface UserRequest extends express.Request {
   user?: UserDocument;
+  cookies: {
+    jwt: string;
+  };
 }
 
 interface UserResponse extends express.Response {
