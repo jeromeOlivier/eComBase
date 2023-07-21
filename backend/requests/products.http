@@ -1,7 +1,7 @@
 ### Get all products
 GET {{baseUrl}}/api/products
 
-### Get single productModel
+### Get single product
 GET {{baseUrl}}/api/products/64ad4853f5e5764f18aacfb8
 
 

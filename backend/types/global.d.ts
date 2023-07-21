@@ -1,17 +1,20 @@
 import { UserDocument } from "../models/user-model";
-import { Request as ExpressRequest } from "express";
+import * as express from "express";
 
 // TYPESCRIPT VOODOO!!!: This file is used to extend the Request type definition
 // of Express to include a user property and a cookies object. This will allow
 // us to work with the user property and cookie object in the request object of
-// our controllers. MAGIC!!!
+// our controllers. MAGIC!!! (if only it worked)
 
-declare module "express-serve-static-core" {
-  export interface Request extends ExpressRequest {
-    user?: UserDocument;
-    cookies: any;
-  }
+interface UserRequest extends express.Request {
+  user?: UserDocument;
 }
+
+interface UserResponse extends express.Response {
+  user?: UserDocument;
+}
+
+export { UserRequest, UserResponse };
 
 // NOTES:
 // The Request type definition of Express is defined in the

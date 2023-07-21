@@ -4,8 +4,9 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux";
 import logo from "../assets/styles/logo.png";
 import { RootState } from "../store.ts";
+import { CartItemType } from "../types/CartItemType.ts";
 
-const header = () => {
+const Header = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   // console.log(cartItems);
   return (
@@ -34,7 +35,7 @@ const header = () => {
                   <FaShoppingCart /> Cart
                   {cartItems.length > 0 && (
                     <Badge pill bg="danger" style={{ marginLeft: "5px" }}>
-                      {cartItems.reduce((acc: number, item: any) => {
+                      {cartItems.reduce((acc: number, item: CartItemType) => {
                         return acc + item.quantity;
                       }, 0)}
                     </Badge>
@@ -54,4 +55,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;

@@ -1,8 +1,8 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel, UserDocument } from "../models/user-model";
-import { Response, NextFunction } from "express";
+import { NextFunction } from "express";
 import asyncHandler from "./async-handler";
-import { Request } from "express-serve-static-core";
+import { UserRequest, UserResponse } from "../types/global";
 
 // GENERAL: This middleware will be used to protect routes that require
 // authentication. It will check if the request contains a valid token in the
@@ -15,7 +15,7 @@ import { Request } from "express-serve-static-core";
 // request cookies and to set the user information in the req.user object once
 // the JWT token is verified and the user identity has been established.
 const protect = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: UserRequest, res: UserResponse, next: NextFunction) => {
     let token: string | undefined;
 
     // Read JWT from the cookie
@@ -41,26 +41,26 @@ const protect = asyncHandler(
       } catch (error) {
         console.error(error);
         res.status(401);
-        throw new Error("Not authorized, token failed");
+        throw new Error("Unauthorized");
       }
     } else {
       res.status(401);
-      throw new Error("Not authorized, no token");
+      throw new Error("Unauthorized");
     }
   }
 );
 
 // ADMIN: The admin middleware function is used to protect routes that require
 // authentication and authorization.
-const admin = (req: Request, res: Response, next: NextFunction) => {
+const admin = (req: UserRequest, res: UserResponse, next: NextFunction) => {
   // If the user is logged in and is an admin, the middleware will call next()
   // to pass control to the next middleware or route handler. Otherwise, the
   // middleware will throw an error.
-  if (req.user && req.user.isAdmin) {
+  if (req.user?.isAdmin) {
     next();
   } else {
     res.status(401);
-    throw new Error("Not an admin");
+    throw new Error("Unauthorized");
   }
 };
 

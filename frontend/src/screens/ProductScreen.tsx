@@ -26,7 +26,6 @@ const ProductScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const result = useGetProductByIdQuery(productId);
-  4;
   const product: ProductType = result.data;
   const { isLoading, error } = result as {
     isLoading: boolean;
@@ -43,7 +42,6 @@ const ProductScreen = () => {
   };
 
   useSelector((state: RootState) => state.cart);
-  // console.log("Cart Item: ", cart.cartItems);
   const addToCartHandler = () => {
     dispatch(addToCart({ product: { ...product }, quantity }));
     navigate("/cart");

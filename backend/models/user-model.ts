@@ -1,4 +1,4 @@
-import { Schema, Document, model, InferSchemaType } from "mongoose";
+import { Schema, Document, model } from "mongoose";
 import bcrypt from "bcryptjs";
 
 interface UserBase {
@@ -31,6 +31,14 @@ UserSchema.methods.matchPassword = async function (
 ): Promise<boolean> {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+UserSchema.pre("save", async function (this: UserDocument, next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 // Finally, define the model that will be used to query the database
 // note that the collection name is explicitly specified as "users"

@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,7 +7,7 @@ const connectDB = async () => {
   if (!URI) throw new Error("MongoDB URI is not defined");
 
   try {
-    const conn: Mongoose = await mongoose.connect(URI);
+    await mongoose.connect(URI);
     console.log(`MongoDB Successfully Connected`);
     console.log("Mongo HOSTNAME:", mongoose.connection.host);
     console.log("Mongo DATABASE:", mongoose.connection.name);

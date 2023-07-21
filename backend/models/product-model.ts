@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { ReviewType, ReviewSchema } from "./review-model";
 
-type ProductType = {
+export type ProductType = {
   user: string;
   name: string;
   image: string;
@@ -36,4 +36,4 @@ const ProductSchema = new mongoose.Schema(
 
 // collection name is explicitly specified as "products"
 const ProductModel = mongoose.model("Product", ProductSchema, "products");
-export { ProductModel, ProductType, ProductSchema };
+export { ProductModel, ProductSchema };

@@ -1,6 +1,5 @@
 ### User authenticates with valid email and password
-# @no-cookie-jar
-POST {{baseUrl}}/api/users/login
+POST {{baseUrl}}/api/users/auth
 Content-Type: application/json
 
 {
@@ -8,8 +7,17 @@ Content-Type: application/json
   "password": "{{password}}"
 }
 
+### Admin authenticates with valid email and password
+POST {{baseUrl}}/api/users/auth
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{password}}"
+}
+
 ### User authenticates with invalid email
-POST {{baseUrl}}/api/users/login
+POST {{baseUrl}}/api/users/auth
 Content-Type: application/json
 
 {
@@ -19,6 +27,22 @@ Content-Type: application/json
 
 ### User registers
 POST {{baseUrl}}/api/users/
+Content-Type: application/json
+
+{
+  "name": "Jerome Olivier",
+  "email": "jerome@olivier.link",
+  "password": "123456"
+}
+
+### Jerome logs in
+POST {{baseUrl}}/api/users/auth
+Content-Type: application/json
+
+{
+  "email": "jerome@olivier.link",
+  "password": "123456"
+}
 
 ### User logs out
 POST {{baseUrl}}/api/users/logout
@@ -28,6 +52,12 @@ GET {{baseUrl}}/api/users/profile
 
 ### User updates their profile
 PUT {{baseUrl}}/api/users/profile
+Content-Type: application/json
+
+{
+  "name": "Jerome Olivier",
+  "email": "jerome@olivier.link"
+}
 
 ### Admin gets all users
 GET {{baseUrl}}/api/users/admin
