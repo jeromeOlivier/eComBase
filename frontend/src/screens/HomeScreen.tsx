@@ -19,12 +19,8 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1>Maîtrisez les outils de bureautique les plus en demande</h1>
-      <h2>
-        Devenez l'employé efficace ou le candidat que les entreprises adorent
-        embaucher
-      </h2>
-      <h3>Les Manuels:</h3>
+      <h1>eComBase</h1>
+      <h3>Products</h3>
       {isLoading ? (
         <Loader />
       ) : error ? (

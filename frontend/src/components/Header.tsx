@@ -8,7 +8,6 @@ import { CartItemType } from "../types/CartItemType.ts";
 
 const Header = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
-  // console.log(cartItems);
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -17,7 +16,7 @@ const Header = () => {
             <Navbar.Brand>
               <img
                 src={logo}
-                alt="Valerie Gervais"
+                alt="logo"
                 width="auto"
                 height="30"
                 className="d-inline-block align-top"
