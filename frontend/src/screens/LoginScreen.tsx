@@ -4,44 +4,53 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
-// import Message from "../components/Message";
-import { useLoginMutation } from "../slices/userApiSlice";
+import { useLoginMutation } from "../slices/usersApiSlice.ts";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import RootStateType from "../types/RootStateType.ts";
 
 const LoginScreen = () => {
+  // react hooks for states of email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // redux hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
-  const { userInfo } = useSelector((state: any) => state.auth);
-  {
-    /* TODO: what is the type for state? Learn how to do types!!! */
-  }
+  const { userInfo } = useSelector((state: RootStateType) => state.auth);
 
-  const { search } = useLocation();
-  const sp = new URLSearchParams(search);
-  const redirect = sp.get("redirect") || "/";
-
+  // search if the URL contains something like "?redirect=/shipping"
+  const { search } = useLocation(); // returns the URL query String
+  // returns a URLSearchParams object instance
+  const searchParams = new URLSearchParams(search);
+  // returns the value of the query string parameter "redirect"
+  // or "/" if it doesn't exist
+  const redirect = searchParams.get("redirect") || "/";
+  // if user's logged in, navigate to the redirect URL
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
     }
-  }, [navigate, redirect, userInfo]);
+  }, [userInfo, navigate, redirect]);
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // unwrap() is a utility function that extracts data from a fulfilled
+      // promise. If the promise is rejected, unwrap() throws the error.
+      // note: login comes from useLoginMutation() hook defined in userApiSlice.ts
+      console.log("email: ", email);
+      console.log("password: ", password);
       const response = await login({ email, password }).unwrap();
+      console.log("response: ", response);
+      // dispatch the action to set credentials in localStorage. setCredentials
+      // is an action creator defined in authSlice.ts line 13
       dispatch(setCredentials({ ...response }));
+      // redirect to the redirect URL
       navigate(redirect);
-    } catch (err: any) {
-      {
-        /* TODO: learn how to manage errors */
-      }
-      toast.error(err?.data?.message || err?.error?.message);
+    } catch (err) {
+      console.log("err: ", err);
+      toast.error("Invalid credentials");
     }
   };
   return (
@@ -79,7 +88,7 @@ const LoginScreen = () => {
       <Row className="py-3">
         <Col>
           New Customer?{" "}
-          <Link to={redirect ? `/register?redirect${redirect}` : `/register`}>
+          <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>
             Register
           </Link>
         </Col>

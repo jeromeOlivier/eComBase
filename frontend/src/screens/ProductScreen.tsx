@@ -12,12 +12,12 @@ import {
   Form,
 } from "react-bootstrap";
 import Rating from "../components/Rating.tsx";
-import { useGetProductByIdQuery } from "../slices/apiSlice";
+import { useGetProductByIdQuery } from "../slices/productsApiSlice.ts";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { addToCart } from "../slices/cartSlice";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { StoreState } from "../store";
 import { ProductType } from "../types/ProductType";
 
 const ProductScreen = () => {
@@ -41,7 +41,7 @@ const ProductScreen = () => {
     }
   };
 
-  useSelector((state: RootState) => state.cart);
+  useSelector((state: StoreState) => state.cart);
   const addToCartHandler = () => {
     dispatch(addToCart({ product: { ...product }, quantity }));
     navigate("/cart");

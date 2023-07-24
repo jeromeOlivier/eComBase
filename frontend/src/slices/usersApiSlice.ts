@@ -3,7 +3,7 @@ import { BASE_URL, USERS_URL } from "../constants";
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 
-export const userApiSlice = createApi({
+export const usersApiSlice = createApi({
   baseQuery,
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -14,8 +14,9 @@ export const userApiSlice = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useLoginMutation } = userApiSlice;
+export const { useLoginMutation } = usersApiSlice;

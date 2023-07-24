@@ -11,7 +11,7 @@ import {
 import { FaTrash } from "react-icons/fa";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store.ts";
+import { StoreState } from "../store.ts";
 import { ProductType } from "../types/ProductType.ts";
 import { ChangeEvent } from "react";
 import { addToCart, removeFromCart } from "../slices/cartSlice.ts";
@@ -20,7 +20,7 @@ const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state: RootState) => state.cart);
+  const cart = useSelector((state: StoreState) => state.cart);
   const { cartItems } = cart;
 
   // to add item to cart
