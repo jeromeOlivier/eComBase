@@ -1,12 +1,13 @@
-import AuthType from "./AuthType.ts";
-// import { UserType } from "./UserType.ts";
-import { CartStateType } from "./CartStateType.ts";
+import AuthType from "./AuthType";
+import { CartStateType } from "./CartStateType";
+import { AddressType } from "./AddressType";
 
-// The RootStateType is the type of the entire Redux store
+// The RootStateType is the type for the entire Redux store
 type RootStateType = {
-  auth: AuthType;
-  // userInfo: UserType;
-  cart: CartStateType;
+  auth?: AuthType; // auth includes user info and token
+  cart?: CartStateType;
+  shippingAddress?: AddressType;
+  paymentMethod?: string;
 };
 
 export default RootStateType;

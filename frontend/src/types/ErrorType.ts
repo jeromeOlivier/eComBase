@@ -1,7 +1,7 @@
 export type ErrorType = {
-  data: {
-    message: string;
-    status: number;
+  data?: {
+    message?: string | unknown;
+    status?: number;
   };
-  error: string;
+  error?: string;
 };

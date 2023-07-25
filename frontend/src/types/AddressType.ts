@@ -1,8 +1,6 @@
 export type AddressType = {
-  email: string;
-  street: string;
-  apartment?: string;
+  address: string;
   city: string;
+  province: string;
   postalCode: string;
-  country: string;
 };

@@ -19,19 +19,25 @@ import { addToCart } from "../slices/cartSlice";
 import { useSelector } from "react-redux";
 import { StoreState } from "../store";
 import { ProductType } from "../types/ProductType";
+import { ErrorType } from "../types/ErrorType.ts";
 
 const ProductScreen = () => {
   const { id: productId } = useParams() as { id: string };
+  const result = useGetProductByIdQuery(productId);
+
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const result = useGetProductByIdQuery(productId);
+
   const product: ProductType = result.data;
   const { isLoading, error } = result as {
     isLoading: boolean;
-    error: any;
+    error: { data: { message: string | unknown } };
   };
-  const renderErrorMessage = (err: any) => {
+
+  const renderErrorMessage = (err: ErrorType) => {
+    // Check if it's a FetchBaseQueryError
+    // const err = unknownError as ErrorType;
     const { data } = err || {};
     const { message } = data || {};
     if (typeof message === "function") {
