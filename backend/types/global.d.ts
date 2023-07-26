@@ -7,17 +7,21 @@ import * as express from "express";
 // our controllers. MAGIC!!! (if only it worked)
 
 interface UserRequest extends express.Request {
-  user?: UserDocument;
+  user: UserDocument;
   cookies: {
     jwt: string;
   };
 }
 
 interface UserResponse extends express.Response {
-  user?: UserDocument;
+  user: UserDocument;
 }
 
-export { UserRequest, UserResponse };
+interface UserNextFunction extends express.NextFunction {
+  user: UserDocument;
+}
+
+export { UserRequest, UserResponse, UserNextFunction };
 
 // NOTES:
 // The Request type definition of Express is defined in the

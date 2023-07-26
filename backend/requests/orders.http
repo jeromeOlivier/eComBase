@@ -1,0 +1,17 @@
+### Add item to order
+POST {{baseUrl}}/api/orders
+
+### Get logged in user's order
+GET {{baseUrl}}/api/orders/mine
+
+### Get order by id
+GET {{baseUrl}}/api/orders/{{orderId}}
+
+### Update order to paid
+PUT {{baseUrl}}/api/orders/{{orderId}}/pay
+
+### Update order to delivered
+PUT {{baseUrl}}/api/orders/{{orderId}}/deliver
+
+### Get all orders
+GET {{baseUrl}}/api/orders

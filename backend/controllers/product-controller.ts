@@ -5,7 +5,7 @@ import asyncHandler from "../middleware/async-handler";
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
-const getProducts = asyncHandler(async (req: Request, res: Response) => {
+const getProducts = asyncHandler(async (_req: Request, res: Response) => {
   const products = (await ProductModel.find({})) as ProductType[];
   console.log(products);
   res.json(products);

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 type OrderType = {
   user: string;
   orderItems: {
+    _id: string;
     name: string;
     qty: number;
     image: string;

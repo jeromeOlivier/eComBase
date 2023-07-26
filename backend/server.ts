@@ -5,6 +5,7 @@ dotenv.config();
 
 import productRoutes from "./routes/product-routes";
 import userRoutes from "./routes/user-routes";
+import orderRoutes from "./routes/order-routes";
 import connectDB from "./config/db";
 import { errorHandler } from "./middleware/error-handler";
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => res.send("Server is ready"));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 app.use(errorHandler);
 
 // START SERVER
