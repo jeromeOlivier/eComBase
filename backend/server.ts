@@ -27,7 +27,7 @@ app.get("/", (req, res) => res.send("Server is ready"));
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
-app.use(errorHandler);
+app.use(errorHandler as express.ErrorRequestHandler);
 
 // START SERVER
 app.listen(port, () => console.log(`Server running on port: ${port}`));

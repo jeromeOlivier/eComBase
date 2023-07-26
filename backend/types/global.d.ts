@@ -2,34 +2,24 @@ import { UserDocument } from "../models/user-model";
 import * as express from "express";
 
 // TYPESCRIPT VOODOO!!!: This file is used to extend the Request type definition
-// of Express to include a user property and a cookies object. This will allow
-// us to work with the user property and cookie object in the request object of
-// our controllers. MAGIC!!! (if only it worked)
+// of Express to include a user property and a cookies object. This allows us to
+// work with the user property and cookie object in the request object of our
+// controllers.
 
-interface UserRequest extends express.Request {
-  user: UserDocument;
+interface ExtendedRequest extends Omit<express.Request, "user"> {
+  user?: UserDocument;
   cookies: {
     jwt: string;
   };
 }
 
-interface UserResponse extends express.Response {
-  user: UserDocument;
+interface ExtendedResponse extends express.Response {
+  user?: UserDocument;
 }
 
-interface UserNextFunction extends express.NextFunction {
-  user: UserDocument;
-}
+interface ExtendedNextFunction extends express.NextFunction {}
 
-export { UserRequest, UserResponse, UserNextFunction };
+export { ExtendedRequest, ExtendedResponse, ExtendedNextFunction };
 
-// NOTES:
-// The Request type definition of Express is defined in the
-// @types/express-serve-static-core package.
-//
-// The Request type definition of Express is defined as follows:
-// declare namespace Express {
-//   interface Request extends http.IncomingMessage, Express.Request {
-//     [key: string]: any;
-//   }
-// }
+// In order for this to work, we need to use this in our controllers.
+// We also need to import this file in our middleware/error-handler.ts file.

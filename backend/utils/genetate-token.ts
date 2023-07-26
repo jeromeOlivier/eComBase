@@ -1,7 +1,7 @@
-import { Response } from "express-serve-static-core";
+import { ExtendedResponse } from "../types/global";
 import jwt from "jsonwebtoken";
 
-const generateToken = (res: Response, userId: string) => {
+const generateToken = (res: ExtendedResponse, userId: string) => {
   const token = jwt.sign({ id: userId }, process.env.JWT_SECRET!, {
     expiresIn: "30d", // TODO: set to 1d for production
   });

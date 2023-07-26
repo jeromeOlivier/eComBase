@@ -1,8 +1,11 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { UserModel, UserDocument } from "../models/user-model";
-import { NextFunction } from "express";
-import asyncHandler from "./async-handler";
-import { UserRequest, UserResponse } from "../types/global";
+import asyncUserHandler from "./async-handler";
+import {
+  ExtendedRequest,
+  ExtendedResponse,
+  ExtendedNextFunction,
+} from "../types/global";
 
 // GENERAL: This middleware will be used to protect routes that require
 // authentication. It will check if the request contains a valid token in the
@@ -14,8 +17,12 @@ import { UserRequest, UserResponse } from "../types/global";
 // RequestWithUserAndCookies is used to get the jwt token from the incoming
 // request cookies and to set the user information in the req.user object once
 // the JWT token is verified and the user identity has been established.
-const protect = asyncHandler(
-  async (req: UserRequest, res: UserResponse, next: NextFunction) => {
+const protect = asyncUserHandler(
+  async (
+    req: ExtendedRequest,
+    res: ExtendedResponse,
+    next: ExtendedNextFunction
+  ) => {
     let token: string | undefined;
 
     // Read JWT from the cookie
@@ -52,7 +59,11 @@ const protect = asyncHandler(
 
 // ADMIN: The admin middleware function is used to protect routes that require
 // authentication and authorization.
-const admin = (req: UserRequest, res: UserResponse, next: NextFunction) => {
+const admin = (
+  req: ExtendedRequest,
+  res: ExtendedResponse,
+  next: ExtendedNextFunction
+) => {
   // If the user is logged in and is an admin, the middleware will call next()
   // to pass control to the next middleware or route handler. Otherwise, the
   // middleware will throw an error.

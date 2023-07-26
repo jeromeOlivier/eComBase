@@ -1,7 +1,11 @@
-import { NextFunction, Request, Response } from "express";
+import {
+  ExtendedNextFunction,
+  ExtendedRequest,
+  ExtendedResponse,
+} from "../types/global";
 import { Error } from "mongoose";
 
-const setStatusCode = (res: Response, status: number) =>
+const setStatusCode = (res: ExtendedResponse, status: number) =>
   res.statusCode === 200 ? status : res.statusCode;
 
 const isMongooseBadObjectId = (err: Error): boolean => {
@@ -18,7 +22,7 @@ const isMongooseDuplicateKey = (err: Error): boolean => {
 
 const handleErrors = (
   err: Error,
-  res: Response
+  res: ExtendedResponse
 ): { statusCode: number; message: string; stack: string | undefined } => {
   let statusCode = setStatusCode(res, 500);
   let message = err.message;
@@ -37,10 +41,10 @@ const getStackTrace = (err: Error): string | undefined =>
 
 const errorHandler = (
   err: Error,
-  _req: Request, // unused
-  res: Response,
-  next: NextFunction
-): Response | void => {
+  req: ExtendedRequest,
+  res: ExtendedResponse,
+  next: ExtendedNextFunction
+): ExtendedResponse | void => {
   if (err) {
     const error = handleErrors(err, res);
     return res.status(error.statusCode).json(error);

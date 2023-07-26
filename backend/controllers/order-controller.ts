@@ -1,6 +1,6 @@
 import { OrderModel, OrderType } from "../models/order-model";
-import { UserRequest, UserResponse } from "../types/global";
-import asyncHandler from "../middleware/async-user-handler";
+import { ExtendedRequest, ExtendedResponse } from "../types/global";
+import asyncUserHandler from "../middleware/async-handler";
 // import RootStateType from "../../frontend/src/types/RootStateType";
 // import { ProductType } from "../models/product-model";
 // import { CartStateType } from "../../frontend/src/types/CartStateType";
@@ -8,8 +8,10 @@ import asyncHandler from "../middleware/async-user-handler";
 // @desc    Add order items
 // @route   POST /api/orders
 // @access  Private
-const addOrderItems = asyncHandler(
-  async (req: UserRequest, res: UserResponse) => {
+const addOrderItems = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
+    if (!req.user) throw new Error("User not found");
+
     const {
       orderItems,
       shippingAddress,
@@ -48,8 +50,9 @@ const addOrderItems = asyncHandler(
 // @desc    Get logged-in user's order
 // @route   POST /api/orders/my-orders
 // @access  Private
-const getMyOrders = asyncHandler(
-  async (req: UserRequest, res: UserResponse) => {
+const getMyOrders = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
+    if (!req.user) throw new Error("User not found");
     const orders: OrderType[] = await OrderModel.find({ user: req.user._id });
     res.status(200).json(orders);
   }
@@ -58,8 +61,8 @@ const getMyOrders = asyncHandler(
 // @desc    Get order by ID
 // @route   POST /api/orders/:id
 // @access  Private
-const getOrderById = asyncHandler(
-  async (req: UserRequest, res: UserResponse) => {
+const getOrderById = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
     const order = await OrderModel.findById(req.params.id).populate(
       "user",
       "name email"
@@ -77,8 +80,8 @@ const getOrderById = asyncHandler(
 // @desc    Update order to paid
 // @route   GET /api/orders/:id/pay
 // @access  Private
-const updateOrderToPaid = asyncHandler(
-  async (_req: UserRequest, res: UserResponse) => {
+const updateOrderToPaid = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
     res.send("order updated to paid");
   }
 );
@@ -86,8 +89,8 @@ const updateOrderToPaid = asyncHandler(
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver
 // @access  Private/Admin
-const updateOrderToDelivered = asyncHandler(
-  async (_req: UserRequest, res: UserResponse) => {
+const updateOrderToDelivered = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
     res.send("order updated to delivered!");
   }
 );
@@ -95,9 +98,11 @@ const updateOrderToDelivered = asyncHandler(
 // @desc    Get all orders
 // @route   GET /api/orders
 // @access  Private/Admin
-const getOrders = asyncHandler(async (_req: UserRequest, res: UserResponse) => {
-  res.send("here are all orders!");
-});
+const getOrders = asyncUserHandler(
+  async (req: ExtendedRequest, res: ExtendedResponse) => {
+    res.send("here are all orders!");
+  }
+);
 
 export {
   addOrderItems,
