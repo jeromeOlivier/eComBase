@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../slices/cartSlice";
-import RootStateType from "../types/RootStateType";
+import Transaction from "../types/Transaction.ts";
 import CheckoutSteps from "../components/CheckoutSteps.tsx";
 
 const ShippingScreen = () => {
-  const cart = useSelector((state: RootStateType) => state.cart);
+  const cart = useSelector((state: Transaction) => state.cart);
   const { shippingAddress } = cart;
 
   const [address, setAddress] = useState(shippingAddress.address || "");

@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute.tsx";
 import "./assets/styles/bootstrap.custom.css";
 import "./assets/styles/index.css";
 import PaymentScreen from "./screens/PaymentScreen.tsx";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen.tsx";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 const root = ReactDOM.createRoot(rootElement);
@@ -33,6 +34,7 @@ root.render(
             <Route path="" element={<PrivateRoute />}>
               <Route path="shipping" element={<ShippingScreen />} />
               <Route path="payment" element={<PaymentScreen />} />
+              <Route path="placeorder" element={<PlaceOrderScreen />} />
             </Route>
           </Route>
         </Routes>

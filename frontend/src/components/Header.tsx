@@ -7,11 +7,11 @@ import logo from "../assets/styles/logo.png";
 import { CartItemType } from "../types/CartItemType.ts";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
-import RootStateType from "../types/RootStateType.ts";
+import Transaction from "../types/Transaction.ts";
 
 const Header = () => {
-  const { cartItems } = useSelector((state: RootStateType) => state.cart);
-  const { userInfo } = useSelector((state: RootStateType) => state.auth);
+  const { cartItems } = useSelector((state: Transaction) => state.cart);
+  const { userInfo } = useSelector((state: Transaction) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

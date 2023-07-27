@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import { useRegisterMutation } from "../slices/usersApiSlice.ts";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
-import RootStateType from "../types/RootStateType.ts";
+import Transaction from "../types/Transaction.ts";
 
 const RegisterScreen = () => {
   // react hooks for states of email and password
@@ -21,7 +21,7 @@ const RegisterScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [register, { isLoading }] = useRegisterMutation();
-  const { userInfo } = useSelector((state: RootStateType) => state.auth);
+  const { userInfo } = useSelector((state: Transaction) => state.auth);
 
   // search if the URL contains a "?redirect=..." query string parameter
   const { search } = useLocation(); // returns the URL query String

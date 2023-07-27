@@ -8,14 +8,14 @@ import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../slices/cartSlice";
 // types
-import RootStateType from "../types/RootStateType";
+import Transaction from "../types/Transaction.ts";
 
 const PaymentScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state: RootStateType) => state.cart);
+  const cart = useSelector((state: Transaction) => state.cart);
   const { shippingAddress } = cart;
 
   useEffect(() => {
