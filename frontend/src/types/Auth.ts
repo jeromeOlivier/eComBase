@@ -1,4 +1,4 @@
-type AuthType = {
+export type Auth = {
   userInfo: {
     _id: string;
     name: string;
@@ -6,5 +6,3 @@ type AuthType = {
     isAdmin: boolean;
   };
 };
-
-export default AuthType;

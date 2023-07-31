@@ -1,4 +1,8 @@
+// Purpose: Component for the checkout steps
+// external imports
+// bootstrap
 import { Nav } from "react-bootstrap";
+// react
 import { LinkContainer } from "react-router-bootstrap";
 
 interface CheckoutStepsProps {

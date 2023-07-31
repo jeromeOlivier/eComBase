@@ -1,11 +1,20 @@
-import { FormEvent, useState } from "react";
+// Purpose: Screen for user to enter shipping information.
+// external imports
+// bootstrap
 import { Form, Button } from "react-bootstrap";
+// react
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// redux
 import { useDispatch, useSelector } from "react-redux";
+// internal imports
+// components
 import FormContainer from "../components/FormContainer";
-import { saveShippingAddress } from "../slices/cartSlice";
-import Transaction from "../types/Transaction.ts";
 import CheckoutSteps from "../components/CheckoutSteps.tsx";
+// slices & utils
+import { saveShippingAddress } from "../slices/cartSlice";
+// types
+import { Transaction } from "../types/Transaction.ts";
 
 const ShippingScreen = () => {
   const cart = useSelector((state: Transaction) => state.cart);

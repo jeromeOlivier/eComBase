@@ -1,6 +1,6 @@
 import { USERS_URL } from "../constants";
 import { apiSlice } from "./apiSlice.ts";
-import { UserType } from "../types/UserType.ts";
+import { User } from "../types/User.ts";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +18,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     register: builder.mutation({
-      query: (data: UserType) => ({
+      query: (data: User) => ({
         url: `${USERS_URL}`,
         method: "POST",
         body: data,

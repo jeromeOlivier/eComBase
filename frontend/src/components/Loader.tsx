@@ -1,3 +1,6 @@
+// Purpose: Displays a spinner while page loads.
+// external imports
+// bootstrap
 import { Spinner } from "react-bootstrap";
 
 const Loader = () => {

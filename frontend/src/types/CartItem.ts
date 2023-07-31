@@ -1,6 +1,6 @@
 import { ProductType } from "./ProductType.ts";
 
-export type CartItemType = {
+export type CartItem = {
   product: ProductType;
   quantity: number;
 };

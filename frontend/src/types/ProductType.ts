@@ -1,5 +1,6 @@
 import { ReviewType } from "../../../backend/models/review-model.ts";
 
+// Hungarian notation used to avoid conflict with `Product` component.
 export type ProductType = {
   _id: string;
   name: string;

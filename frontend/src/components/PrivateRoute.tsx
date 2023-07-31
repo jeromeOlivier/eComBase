@@ -1,6 +1,11 @@
+// Purpose: PrivateRoute component for routing to private pages.
+// external imports
+// react
 import { Outlet, Navigate } from "react-router-dom";
+// redux
 import { useSelector } from "react-redux";
-import Transaction from "../types/Transaction.ts";
+// types
+import { Transaction } from "../types/Transaction.ts";
 
 const PrivateRoute = () => {
   const { userInfo } = useSelector((state: Transaction) => state.auth);

@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { updateCart } from "../utilities/cartUtils";
-import { CartStateType } from "../types/CartStateType.ts";
+import { Cart } from "../types/Cart.ts";
 import { ProductType } from "../types/ProductType.ts";
 
-const initialState: CartStateType = localStorage.getItem("cart")
+const initialState: Cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
 
-const cartSlice: Slice<CartStateType> = createSlice({
+const cartSlice: Slice<Cart> = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (
-      state: CartStateType,
+      state: Cart,
       action: PayloadAction<{ product: ProductType; quantity: number }>
     ) => {
       const newItem = action.payload;
@@ -33,7 +33,7 @@ const cartSlice: Slice<CartStateType> = createSlice({
       return updateCart(state);
     },
     removeFromCart: (
-      state: CartStateType,
+      state: Cart,
       action: PayloadAction<{ productId: string }>
     ) => {
       console.log(action.payload);

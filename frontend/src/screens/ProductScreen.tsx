@@ -1,7 +1,8 @@
+// external imports
+// react
 import { ChangeEvent, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import {
   Row,
   Col,
@@ -11,14 +12,20 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
+// redux
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+// internal imports
+// components
 import Rating from "../components/Rating.tsx";
-import { useGetProductByIdQuery } from "../slices/productsApiSlice.ts";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+// slices & utils
 import { addToCart } from "../slices/cartSlice";
-import { useSelector } from "react-redux";
-import { StoreState } from "../store";
-import { ProductType } from "../types/ProductType";
+import { useGetProductByIdQuery } from "../slices/productsApiSlice.ts";
+// types
+import { Store } from "../store";
+import { ProductType } from "../types/ProductType.ts";
 import { ErrorType } from "../types/ErrorType.ts";
 
 const ProductScreen = () => {
@@ -36,8 +43,6 @@ const ProductScreen = () => {
   };
 
   const renderErrorMessage = (err: ErrorType) => {
-    // Check if it's a FetchBaseQueryError
-    // const err = unknownError as ErrorType;
     const { data } = err || {};
     const { message } = data || {};
     if (typeof message === "function") {
@@ -47,7 +52,7 @@ const ProductScreen = () => {
     }
   };
 
-  useSelector((state: StoreState) => state.cart);
+  useSelector((state: Store) => state.cart);
   const addToCartHandler = () => {
     dispatch(addToCart({ product: { ...product }, quantity }));
     navigate("/cart");

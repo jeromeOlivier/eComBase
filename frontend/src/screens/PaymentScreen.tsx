@@ -1,14 +1,18 @@
-// dependencies
+// external imports
+// react
 import { useState, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// bootstrap
 import { Form, Button, Col } from "react-bootstrap";
+// internal imports
 // components
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
+// slices & utils
 import { savePaymentMethod } from "../slices/cartSlice";
 // types
-import Transaction from "../types/Transaction.ts";
+import { Transaction } from "../types/Transaction.ts";
 
 const PaymentScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState("PayPal");

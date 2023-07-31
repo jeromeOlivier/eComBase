@@ -1,11 +1,11 @@
-import { CartStateType } from "../types/CartStateType.ts";
-import { CartItemType } from "../types/CartItemType.ts";
+import { Cart } from "../types/Cart.ts";
+import { CartItem } from "../types/CartItem.ts";
 
 const roundToTwoDecimals = (num: number) =>
   Number((Math.round(num * 100) / 100).toFixed(2));
 
-export const updateCart = (state: CartStateType) => {
-  const calculateSubtotal = (cartItems: CartItemType[]) =>
+export const updateCart = (state: Cart) => {
+  const calculateSubtotal = (cartItems: CartItem[]) =>
     roundToTwoDecimals(
       cartItems.reduce(
         (acc, item) => acc + item.product.price * item.quantity,

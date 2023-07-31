@@ -1,13 +1,11 @@
-import AuthType from "./AuthType";
-import { CartStateType } from "./CartStateType";
-import { AddressType } from "./AddressType";
+import { Auth } from "./Auth.ts";
+import { Cart } from "./Cart.ts";
+import { Address } from "./Address.ts";
 
 // The Transaction is the type for the entire Redux store
-type Transaction = {
-  auth?: AuthType; // auth includes user info and token
-  cart?: CartStateType;
-  shippingAddress?: AddressType;
+export type Transaction = {
+  auth?: Auth; // auth includes user info and token
+  cart?: Cart;
+  shippingAddress?: Address;
   paymentMethod?: string;
 };
-
-export default Transaction;

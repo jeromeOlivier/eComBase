@@ -1,4 +1,4 @@
-import { OrderModel, OrderType } from "../models/order-model";
+import { OrderModel } from "../models/order-model";
 import { ExtendedRequest, ExtendedResponse } from "../types/global";
 import asyncHandler from "../middleware/async-handler";
 

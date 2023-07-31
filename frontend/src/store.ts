@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { productsApiSlice } from "./slices/productsApiSlice.ts";
 import { apiSlice } from "./slices/apiSlice.ts";
 import cartSliceReducer from "./slices/cartSlice";
-import { CartStateType } from "./types/CartStateType";
+import { Cart } from "./types/Cart.ts";
 import authSliceReducer from "./slices/authSlice";
 
 const store = configureStore({
@@ -16,8 +16,8 @@ const store = configureStore({
   devTools: true, // TODO: disable in production
 });
 
-export type StoreState = {
+export type Store = {
   [productsApiSlice.reducerPath]: ReturnType<typeof productsApiSlice.reducer>;
-  cart: CartStateType;
+  cart: Cart;
 };
 export default store;

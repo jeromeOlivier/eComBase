@@ -1,4 +1,4 @@
-export type AddressType = {
+export type Address = {
   address: string;
   city: string;
   province: string;

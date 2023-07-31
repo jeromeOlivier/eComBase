@@ -1,3 +1,6 @@
+// Purpose: Provide a footer for the website.
+// external imports
+// bootstrap
 import { Container, Row, Col } from "react-bootstrap";
 
 const Footer = () => {

@@ -1,13 +1,20 @@
-import { useState, useEffect, FormEvent } from "react";
+// external imports
+// bootstrap
 import { Form, Button, Row, Col } from "react-bootstrap";
+// react
+import { toast } from "react-toastify";
+import { useState, useEffect, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+// redux
 import { useDispatch, useSelector } from "react-redux";
+// internal imports
+// components
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
+// slices & utils
 import { useLoginMutation } from "../slices/usersApiSlice.ts";
 import { setCredentials } from "../slices/authSlice";
-import { toast } from "react-toastify";
-import Transaction from "../types/Transaction.ts";
+import { Transaction } from "../types/Transaction.ts";
 
 const LoginScreen = () => {
   // react hooks for states of email and password

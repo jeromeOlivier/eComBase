@@ -1,7 +1,14 @@
+// Purpose: Component for displaying a product in the home screen
+// external imports
+// bootstrap
 import { Card } from "react-bootstrap";
-import { ProductType } from "../types/ProductType.ts";
+// react
 import { Link } from "react-router-dom";
+// internal imports
+// components
 import Rating from "./Rating.tsx";
+// types
+import { ProductType } from "../types/ProductType.ts";
 
 const Product = ({ product }: { product: ProductType }) => {
   return (

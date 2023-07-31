@@ -1,13 +1,21 @@
-import { useState, useEffect, FormEvent } from "react";
+// external imports
+// bootstrap
 import { Form, Button, Row, Col } from "react-bootstrap";
+// react
+import { useState, useEffect, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+// redux
 import { useDispatch, useSelector } from "react-redux";
+// internal imports
+// components
 import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
+// slices & utils
 import { useRegisterMutation } from "../slices/usersApiSlice.ts";
 import { setCredentials } from "../slices/authSlice";
-import { toast } from "react-toastify";
-import Transaction from "../types/Transaction.ts";
+// types
+import { Transaction } from "../types/Transaction.ts";
 
 const RegisterScreen = () => {
   // react hooks for states of email and password

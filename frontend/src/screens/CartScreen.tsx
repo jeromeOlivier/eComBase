@@ -1,4 +1,9 @@
+// external imports
+// react
 import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+import { FaTrash } from "react-icons/fa";
+// bootstrap
 import {
   Row,
   Col,
@@ -8,19 +13,22 @@ import {
   Button,
   Card,
 } from "react-bootstrap";
-import { FaTrash } from "react-icons/fa";
-import Message from "../components/Message";
+// redux
 import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../store.ts";
-import { ProductType } from "../types/ProductType.ts";
-import { ChangeEvent } from "react";
+// internal imports
+// components
+import Message from "../components/Message";
+// slices & utils
 import { addToCart, removeFromCart } from "../slices/cartSlice.ts";
+// types
+import { Store } from "../store.ts";
+import { ProductType } from "../types/ProductType.ts";
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state: StoreState) => state.cart);
+  const cart = useSelector((state: Store) => state.cart);
   const { cartItems } = cart;
 
   // to add item to cart

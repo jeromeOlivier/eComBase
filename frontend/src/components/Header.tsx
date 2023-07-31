@@ -1,13 +1,24 @@
+// Purpose: Header component that contains the navigation bar and links to the
+// cart and login page. Also contains the user's name and a dropdown menu to
+// access their profile and logout.
+// external imports
+// bootstrap
 import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+// react
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+// internal imports
+// graphics
 import logo from "../assets/styles/logo.png";
-import { CartItemType } from "../types/CartItemType.ts";
+// slices
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
-import Transaction from "../types/Transaction.ts";
+// types
+import { CartItem } from "../types/CartItem.ts";
+import { Transaction } from "../types/Transaction.ts";
 
 const Header = () => {
   const { cartItems } = useSelector((state: Transaction) => state.cart);
@@ -52,7 +63,7 @@ const Header = () => {
                   <FaShoppingCart /> Cart
                   {cartItems.length > 0 && (
                     <Badge pill bg="danger" style={{ marginLeft: "5px" }}>
-                      {cartItems.reduce((acc: number, item: CartItemType) => {
+                      {cartItems.reduce((acc: number, item: CartItem) => {
                         return acc + item.quantity;
                       }, 0)}
                     </Badge>

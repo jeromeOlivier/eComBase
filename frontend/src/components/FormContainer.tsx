@@ -1,4 +1,8 @@
+// Purpose: Generate container for the form displayed center screen
+// external imports
+// bootstrap
 import { Container, Row, Col } from "react-bootstrap";
+// react
 import { ReactNode } from "react";
 
 interface Prop {
